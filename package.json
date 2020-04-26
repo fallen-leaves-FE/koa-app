@@ -1,0 +1,33 @@
+{
+  "name": "koa-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "tsc -p tsconfig.json && pm2 start ecosystem.config.js --env production",
+	"dev": "nodemon --watch app/**/* -e ts --exec ts-node app/app.ts",
+	"stop": "pm2 stop koa-app"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "ecosystem": "^0.2.0",
+    "ejs": "^3.1.2",
+    "koa": "^2.11.0",
+    "koa-router": "^7.4.0",
+    "koa-views": "^6.2.1",
+    "pm2": "^4.4.0",
+    "tsc": "^1.20150623.0+f2044a901165a2a97813772353b57dd9ed4796ca"
+  },
+  "devDependencies": {
+    "@types/koa": "^2.11.3",
+    "@types/koa-router": "^7.4.0",
+    "@types/koa-views": "^2.0.4",
+    "nodemon": "^2.0.3",
+    "ts-node": "^8.9.1",
+    "tslib": "^1.11.1",
+    "typescript": "^3.8.3"
+  }
+}
