@@ -24,7 +24,7 @@
 		"esModuleInterop": true
 	},
 	"exclude": [
-		"app/views",
+		"app/views*",
 		"node_modules*"
 	]
 }

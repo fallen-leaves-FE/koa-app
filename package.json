@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "tsc -p tsconfig.json && pm2 start ecosystem.config.js --env production",
-	"dev": "nodemon --watch app/**/* -e ts --exec ts-node app/app.ts",
-	"stop": "pm2 stop koa-app"
+    "dev": "nodemon --watch ./app -e ts,ejs,scss --exec ts-node app/app.ts",
+    "stop": "pm2 stop koa-app",
+    "clean": "ets clean"
   },
   "keywords": [],
   "author": "",
@@ -18,8 +19,7 @@
     "koa": "^2.11.0",
     "koa-router": "^7.4.0",
     "koa-views": "^6.2.1",
-    "pm2": "^4.4.0",
-    "tsc": "^1.20150623.0+f2044a901165a2a97813772353b57dd9ed4796ca"
+    "pm2": "^4.4.0"
   },
   "devDependencies": {
     "@types/koa": "^2.11.3",
