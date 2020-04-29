@@ -1,3 +1,6 @@
 node_modules/
 logs/
 app/**/*.js
+app/static/*
+yarn-error.log
+yarn.lock

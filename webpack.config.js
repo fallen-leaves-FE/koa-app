@@ -2,20 +2,23 @@ const path = require('path')
 const fs = require('fs')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+const devMode = process.env.NODE_ENV !== 'production'
 
-const extractSass = new ExtractTextPlugin({
-	filename: 'static/css/[id].[hash].css',
-	allChunks: true
+const extractSass = new MiniCssExtractPlugin({
+	filename: devMode ? 'css/[name].css' : 'css/[name].[hash].css',
+    chunkFilename: devMode ? 'css/[id].css' : 'css/[id].[hash].css',
 })
 
 const conf = function () {
 	const config = {
-		mode: 'production',
+		mode: process.env.NODE_ENV,
 		entry: {},
 		output: {
-			path: path.resolve(__dirname, './app'),
-			filename: 'static/js/[name].[hash].js',
+			path: path.resolve(__dirname, './app/static'),
+			filename: devMode ? 'js/[name].js' : 'js/[name].[hash].js',
+			chunkFilename: devMode ? 'js/[id].js' : 'js/[id].[hash].js',
 			publicPath: '/'
 		},
 		resolve: {
@@ -38,14 +41,19 @@ const conf = function () {
 					]
 				},
 				{
-					test: /\.scss$/,
-					use: extractSass.extract({
-						use: [{
-							loader: 'css-loader'
-						}, {
-							loader: 'sass-loader'
-						}]
-					})
+					test: /\.(scss|sass)$/,
+					use: [
+						MiniCssExtractPlugin.loader,
+						'css-loader',
+						'sass-loader'
+					]
+				},
+				{
+					test: /\.css$/,
+					use: [
+						MiniCssExtractPlugin.loader,
+						'css-loader'
+					]
 				},
 				{
 					test: /\.(jpe?g|png|gif)$/,
@@ -55,7 +63,7 @@ const conf = function () {
 							options: {
 								name: '[name].[hash].[ext]',
 								limit: 8196,
-								outputPath: 'static/images/'
+								outputPath: 'images/'
 							}
 						}
 					]
@@ -64,9 +72,10 @@ const conf = function () {
 		},
 		plugins: [
 			new CleanWebpackPlugin({
-				cleanOnceBeforeBuildPatterns: ['static/**/*', 'views/**/*']
+				cleanOnceBeforeBuildPatterns: ['js/**/*', 'css/**/*', 'images/**/*']
 			}),
 			extractSass,
+			new OptimizeCssAssetsPlugin()
 		]
 	}
 	const views = fs.readdirSync(path.join(__dirname, './template')).filter(item => (/.html$/).test(item))
@@ -75,7 +84,7 @@ const conf = function () {
 	components.forEach(item => {
 		config.plugins.push(new HtmlWebpackPlugin({
 			template: `html-loader!./template/common/${item}`,
-			filename: `views/common/${item}`,
+			filename: `../views/common/${item}`,
 			minify: {
 				collapseWhitespace: true,
 				removeComments: true,
@@ -96,7 +105,7 @@ const conf = function () {
 		}
 		config.plugins.push(new HtmlWebpackPlugin({
 			template: `html-loader!./template/${item}`,
-			filename: `views/${item}`,
+			filename: `../views/${item}`,
 			minify: {
 				collapseWhitespace: true,
 				removeComments: true,
