@@ -5,9 +5,10 @@
   "main": "index.js",
   "scripts": {
     "start": "tsc -p tsconfig.json && pm2 start ecosystem.config.js --env production",
-    "dev": "nodemon --watch ./app -e ts,ejs,scss --exec ts-node app/app.ts",
+    "dev": "nodemon --watch ./app -e ts,ejs,scss --exec webpack -w --config=webpack.config.js",
     "stop": "pm2 stop koa-app",
-    "clean": "ets clean"
+    "clean": "ets clean",
+    "dev:src": "webpack --config=webpack.config.js"
   },
   "keywords": [],
   "author": "",
@@ -25,9 +26,22 @@
     "@types/koa": "^2.11.3",
     "@types/koa-router": "^7.4.0",
     "@types/koa-views": "^2.0.4",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^8.1.0",
+    "babel-preset-env": "^1.7.0",
+    "clean-webpack-plugin": "^3.0.0",
+    "css-loader": "^3.5.3",
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
+    "html-loader": "^1.1.0",
+    "html-webpack-plugin": "^4.2.1",
+    "node-sass": "^4.14.0",
     "nodemon": "^2.0.3",
+    "sass-loader": "^8.0.2",
     "ts-node": "^8.9.1",
     "tslib": "^1.11.1",
-    "typescript": "^3.8.3"
+    "typescript": "^3.8.3",
+    "url-loader": "^4.1.0",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11"
   }
 }
