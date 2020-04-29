@@ -1,6 +1,8 @@
 ## 安装依赖
 	npm install
-## 开发环境启动
+## 本地开发
 	npm run dev
-## 生产环境
+	npm run server
+## 生产部署
+	npm run build
 	npm start

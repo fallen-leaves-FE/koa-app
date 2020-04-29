@@ -1,7 +1,7 @@
 node_modules/
 logs/
-app/static/
-app/views/
+app/**/*.css
+app/**/*.html
 app/**/*.js
 yarn-error.log
 yarn.lock
