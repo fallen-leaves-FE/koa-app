@@ -3,7 +3,7 @@ import Koa from 'koa'
 import KoaRouter from 'koa-router'
 import views from 'koa-views'
 import server from 'koa-static'
-import routes from './routes'
+import routes from './router'
 const app = new Koa()
 const router = routes(new KoaRouter())
 
