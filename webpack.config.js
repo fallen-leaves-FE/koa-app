@@ -45,6 +45,7 @@ const conf = function () {
 					use: [
 						MiniCssExtractPlugin.loader,
 						'css-loader',
+						'postcss-loader',
 						'sass-loader'
 					]
 				},
@@ -52,7 +53,8 @@ const conf = function () {
 					test: /\.css$/,
 					use: [
 						MiniCssExtractPlugin.loader,
-						'css-loader'
+						'css-loader',
+						'postcss-loader'
 					]
 				},
 				{
