@@ -8,7 +8,7 @@ const devMode = process.env.NODE_ENV !== 'production'
 
 const extractSass = new MiniCssExtractPlugin({
 	filename: devMode ? 'css/[name].css' : 'css/[name].[hash].css',
-    chunkFilename: devMode ? 'css/[id].css' : 'css/[id].[hash].css',
+	chunkFilename: devMode ? 'css/[id].css' : 'css/[id].[hash].css'
 })
 
 const conf = function () {
@@ -36,6 +36,13 @@ const conf = function () {
 							loader: 'babel-loader',
 							options: {
 								presets: ['@babel/preset-env']
+							}
+						},
+						{
+							loader: 'eslint-loader',
+							options: {
+								cache: true,
+								formatter: require('eslint-friendly-formatter')
 							}
 						}
 					]
@@ -69,6 +76,10 @@ const conf = function () {
 							}
 						}
 					]
+				},
+				{
+					test: require.resolve('zepto'),
+					use: ['exports-loader?window.Zepto', 'script-loader']
 				}
 			]
 		},

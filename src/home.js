@@ -1,3 +1,5 @@
 import './scss/index.scss'
 import './scss/header/index.scss'
-console.log(11111)
+import $ from 'zepto'
+const a = 'aaa'
+console.log(a, $)
