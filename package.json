@@ -7,7 +7,7 @@
     "start": "tsc -p tsconfig.json && pm2 start ecosystem.config.js --env production",
     "server": "nodemon --watch ./app -e ts --exec ts-node ./app/app.ts",
     "stop": "pm2 stop koa-app",
-    "dev": "cross-env NODE_ENV=development webpack -w --config=webpack.config.js",
+    "dev": "cross-env NODE_ENV=development webpack -w --display=minimal --config=webpack.config.js",
     "build": "cross-env NODE_ENV=production webpack --config=webpack.config.js"
   },
   "keywords": [],
@@ -25,14 +25,9 @@
     "zepto": "^1.2.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.9.0",
-    "@babel/preset-env": "^7.9.5",
     "@types/koa": "^2.11.3",
     "@types/koa-router": "^7.4.0",
     "@types/koa-views": "^2.0.4",
-    "babel-eslint": "^10.0.1",
-    "babel-loader": "^8.1.0",
-    "babel-plugin-import": "^1.12.2",
     "clean-webpack-plugin": "^3.0.0",
     "cross-env": "^7.0.2",
     "css-loader": "^3.5.3",
