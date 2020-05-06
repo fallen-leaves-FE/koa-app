@@ -29,20 +29,14 @@ const conf = function () {
 		module: {
 			rules: [
 				{
-					test: /\.js$/,
+					test: /\.ts$/,
 					exclude: /(node_modules|bower_components)/,
 					use: [
 						{
-							loader: 'babel-loader',
+							loader: 'ts-loader',
 							options: {
-								presets: ['@babel/preset-env']
-							}
-						},
-						{
-							loader: 'eslint-loader',
-							options: {
-								cache: true,
-								formatter: require('eslint-friendly-formatter')
+								transpileOnly: true,
+								configFile: path.resolve(__dirname, 'tsconfig.json')
 							}
 						}
 					]
@@ -91,8 +85,17 @@ const conf = function () {
 			new OptimizeCssAssetsPlugin()
 		]
 	}
+	if (devMode) {
+		config.module.rules[0].use.push({
+			loader: 'eslint-loader',
+			options: {
+				cache: true,
+				formatter: require('eslint-friendly-formatter')
+			}
+		})
+	}
 	const views = fs.readdirSync(path.join(__dirname, './template')).filter(item => (/.html$/).test(item))
-	const entries = fs.readdirSync(path.join(__dirname, './src')).filter(item => (/.js$/).test(item))
+	const entries = fs.readdirSync(path.join(__dirname, './src')).filter(item => (/.ts$/).test(item))
 	const components = fs.readdirSync(path.join(__dirname, './template/common')).filter(item => (/.html$/).test(item))
 	components.forEach(item => {
 		config.plugins.push(new HtmlWebpackPlugin({
@@ -112,9 +115,9 @@ const conf = function () {
 	views.forEach(item => {
 		const name = item.split('.')[0]
 		const hasEntry = entries.find(entry => name === entry.split('.')[0])
-		config.entry[name] = `./src/${name}.js`
+		config.entry[name] = `./src/${name}.ts`
 		if (!hasEntry) {
-			fs.writeFileSync(`${path.join(__dirname, './src')}/${name}.js`, '')
+			fs.writeFileSync(`${path.join(__dirname, './src')}/${name}.ts`, '')
 		}
 		config.plugins.push(new HtmlWebpackPlugin({
 			template: `html-loader!./template/${item}`,
