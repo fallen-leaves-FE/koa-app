@@ -30,7 +30,7 @@ const conf = function () {
 			rules: [
 				{
 					test: /\.ts$/,
-					exclude: /(node_modules|bower_components)/,
+					exclude: /node_modules/,
 					use: [
 						{
 							loader: 'ts-loader',
@@ -94,12 +94,12 @@ const conf = function () {
 			}
 		})
 	}
-	const views = fs.readdirSync(path.join(__dirname, './template')).filter(item => (/.html$/).test(item))
-	const entries = fs.readdirSync(path.join(__dirname, './src')).filter(item => (/.ts$/).test(item))
-	const components = fs.readdirSync(path.join(__dirname, './template/common')).filter(item => (/.html$/).test(item))
+	const views = fs.readdirSync(path.join(__dirname, './src/template')).filter(item => (/.html$/).test(item))
+	const entries = fs.readdirSync(path.join(__dirname, './src/scripts')).filter(item => (/.ts$/).test(item))
+	const components = fs.readdirSync(path.join(__dirname, './src/template/common')).filter(item => (/.html$/).test(item))
 	components.forEach(item => {
 		config.plugins.push(new HtmlWebpackPlugin({
-			template: `html-loader!./template/common/${item}`,
+			template: `html-loader!./src/template/common/${item}`,
 			filename: `../views/common/${item}`,
 			minify: {
 				collapseWhitespace: true,
@@ -115,12 +115,12 @@ const conf = function () {
 	views.forEach(item => {
 		const name = item.split('.')[0]
 		const hasEntry = entries.find(entry => name === entry.split('.')[0])
-		config.entry[name] = `./src/${name}.ts`
+		config.entry[name] = `./src/scripts/${name}.ts`
 		if (!hasEntry) {
-			fs.writeFileSync(`${path.join(__dirname, './src')}/${name}.ts`, '')
+			fs.writeFileSync(`${path.join(__dirname, './src/scripts')}/${name}.ts`, '')
 		}
 		config.plugins.push(new HtmlWebpackPlugin({
-			template: `html-loader!./template/${item}`,
+			template: `html-loader!./src/template/${item}`,
 			filename: `../views/${item}`,
 			minify: {
 				collapseWhitespace: true,
