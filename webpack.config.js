@@ -18,7 +18,7 @@ const conf = function () {
 		output: {
 			path: path.resolve(__dirname, './app/static'),
 			filename: devMode ? 'js/[name].js' : 'js/[name].[hash].js',
-			chunkFilename: devMode ? 'js/[id].js' : 'js/[id].[hash].js',
+			chunkFilename: devMode ? 'js/[name].chunk.js' : 'js/[name].chunk.[hash].js',
 			publicPath: '/'
 		},
 		resolve: {
@@ -129,7 +129,8 @@ const conf = function () {
 				removeScriptTypeAttributes: true,
 				removeStyleLinkTypeAttributes: true,
 				useShortDoctype: true
-			}
+			},
+			chunks: [name]
 		}))
 	})
 	return config
