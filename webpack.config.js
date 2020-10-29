@@ -4,6 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+const BrowserSyncPlugin = require('browser-sync-webpack-plugin')
 const devMode = process.env.NODE_ENV !== 'production'
 
 const extractSass = new MiniCssExtractPlugin({
@@ -82,7 +83,13 @@ const conf = function () {
 				cleanOnceBeforeBuildPatterns: ['js/**/*', 'css/**/*', 'images/**/*']
 			}),
 			extractSass,
-			new OptimizeCssAssetsPlugin()
+			new OptimizeCssAssetsPlugin(),
+				new BrowserSyncPlugin({
+				host: 'localhost',
+				port: '8888',
+				startPath: '/home',
+				proxy: 'http://localhost:3000/'
+			})
 		]
 	}
 	if (devMode) {
