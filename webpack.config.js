@@ -73,6 +73,19 @@ const conf = function () {
 					]
 				},
 				{
+					test: /\.(eot|woff|woff2?|ttf|svg)$/,
+					use: [
+						{
+							loader: "url-loader",
+							options: {
+							name: "[name]-[hash].[ext]",
+							limit: 5000,
+							outputPath: "fonts/"
+							}
+						}
+					]
+				},
+				{
 					test: require.resolve('zepto'),
 					use: ['exports-loader?window.Zepto', 'script-loader']
 				}
