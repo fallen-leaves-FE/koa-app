@@ -5,6 +5,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin')
+const serverConfig = require('./server-config')
 const devMode = process.env.NODE_ENV !== 'production'
 
 const extractSass = new MiniCssExtractPlugin({
@@ -97,12 +98,7 @@ const conf = function () {
 			}),
 			extractSass,
 			new OptimizeCssAssetsPlugin(),
-				new BrowserSyncPlugin({
-				host: 'localhost',
-				port: '8888',
-				startPath: '/home',
-				proxy: 'http://localhost:3000/'
-			})
+				new BrowserSyncPlugin(serverConfig.browserSync)
 		]
 	}
 	if (devMode) {
