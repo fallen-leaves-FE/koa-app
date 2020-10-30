@@ -9,7 +9,7 @@ const devMode = process.env.NODE_ENV !== 'production'
 
 const extractSass = new MiniCssExtractPlugin({
 	filename: devMode ? 'css/[name].css' : 'css/[name].[hash].css',
-	chunkFilename: devMode ? 'css/[id].css' : 'css/[id].[hash].css'
+	chunkFilename: devMode ? 'css/[id].css' : 'css/[id].[chunkhash].css'
 })
 
 const conf = function () {
@@ -19,7 +19,7 @@ const conf = function () {
 		output: {
 			path: path.resolve(__dirname, './app/static'),
 			filename: devMode ? 'js/[name].js' : 'js/[name].[hash].js',
-			chunkFilename: devMode ? 'js/[name].chunk.js' : 'js/[name].chunk.[hash].js',
+			chunkFilename: devMode ? 'js/[name].chunk.js' : 'js/[name].chunk.[chunkhash].js',
 			publicPath: '/'
 		},
 		resolve: {
