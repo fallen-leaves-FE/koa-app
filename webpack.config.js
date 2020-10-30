@@ -114,9 +114,9 @@ const conf = function () {
 			}
 		})
 	}
-	const views = fs.readdirSync(path.join(__dirname, './src/template')).filter(item => (/.html$/).test(item))
-	const entries = fs.readdirSync(path.join(__dirname, './src/scripts')).filter(item => (/.ts$/).test(item))
-	const components = fs.readdirSync(path.join(__dirname, './src/template/common')).filter(item => (/.html$/).test(item))
+	const views = fs.readdirSync(path.join(__dirname, './src/template')).filter(item => (/\.html$/).test(item))
+	const entries = fs.readdirSync(path.join(__dirname, './src/scripts')).filter(item => (/\.ts$/).test(item))
+	const components = fs.readdirSync(path.join(__dirname, './src/template/common')).filter(item => (/\.html$/).test(item))
 	components.forEach(item => {
 		config.plugins.push(new HtmlWebpackPlugin({
 			template: `html-loader!./src/template/common/${item}`,
