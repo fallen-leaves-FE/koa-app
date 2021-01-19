@@ -1,4 +1,5 @@
 import '@/assets/scss/home.scss'
-import $ from 'zepto'
+import { init, $ } from './common/init'
 
-console.log($)
+init()
+$('#app').addClass('app')

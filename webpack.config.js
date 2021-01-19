@@ -24,6 +24,7 @@ const conf = function () {
 			publicPath: '/'
 		},
 		resolve: {
+			extensions: ['.ts', '.js', '.json'],
 			alias: {
 				'@': path.resolve(__dirname, './src')
 			}
@@ -77,18 +78,14 @@ const conf = function () {
 					test: /\.(eot|woff|woff2?|ttf|svg)$/,
 					use: [
 						{
-							loader: "url-loader",
+							loader: 'url-loader',
 							options: {
-							name: "[name]-[hash].[ext]",
-							limit: 5000,
-							outputPath: "fonts/"
+								name: '[name]-[hash].[ext]',
+								limit: 5000,
+								outputPath: 'fonts/'
 							}
 						}
 					]
-				},
-				{
-					test: require.resolve('zepto'),
-					use: ['exports-loader?window.Zepto', 'script-loader']
 				}
 			]
 		},
@@ -98,7 +95,7 @@ const conf = function () {
 			}),
 			extractSass,
 			new OptimizeCssAssetsPlugin(),
-				new BrowserSyncPlugin(serverConfig.browserSync)
+			new BrowserSyncPlugin(serverConfig.browserSync)
 		]
 	}
 	if (devMode) {

@@ -5,6 +5,33 @@
 	<title><%= title%></title>
 </head>
 <body>
-	<div><%= content%></div>
+	<div id="app">
+		<!-- Rest of the app -->
+		<div class="panel panel-left panel-cover panel-init">
+			<div class="block">
+				<p>Panel left content</p>
+			</div>
+		</div>
+		<div class="view view-main view-init">
+			<div class="page">
+				<div class="navbar">
+					<div class="navbar-bg"></div>
+					<div class="navbar-inner">
+						<div class="left">
+							<a href="#" class="button button-small panel-toggle display-flex" data-panel="left">
+								<i class="f7-icons">layers_alt_fill</i>
+							</a>
+						</div>
+						<div class="title">Appbar</div>
+					</div>
+				</div>
+				<div class="page-content">
+					<div class="block block-strong">
+						<p><%= content%></p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
 </html>
