@@ -1,7 +1,7 @@
 {
-  "name": "koa-app",
-  "version": "1.2.0",
-  "description": "",
+  "name": "{{name}",
+  "version": "{{version}}",
+  "description": "{{description}",
   "main": "index.js",
   "scripts": {
     "start": "tsc -p tsconfig.json && pm2 start ecosystem.config.js --env production",
@@ -11,7 +11,7 @@
     "build": "cross-env NODE_ENV=production webpack --config=webpack.config.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "{{author}",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.19.2",
