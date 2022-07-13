@@ -8,6 +8,7 @@ module.exports = {
 		},
 		'postcss-import': {},
 		'postcss-url': {},
+		'postcss-minify': {},
 		'postcss-px-to-viewport': {
 			unitToConvert: 'px',
 			viewportWidth: 750,
